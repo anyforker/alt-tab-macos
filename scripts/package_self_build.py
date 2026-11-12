@@ -115,13 +115,13 @@ def main():
         run('xcrun', 'stapler', 'staple', app)
         run('xcrun', 'stapler', 'validate', app)
         run('spctl', '--assess', '--type', 'execute', '--verbose=2', app)
-    sources(STAGE / f'AltTab-{VERSION}-SelfBuild-Source.tar.gz')
+    sources(OUT / f'AltTab-{VERSION}-SelfBuild-Source.tar.gz')
     shutil.copy2(ROOT / 'SELF-BUILD.md', STAGE / 'README.md')
     shutil.copy2(ROOT / 'LICENCE.md', STAGE / 'LICENSE.txt')
     (STAGE / '安装说明.txt').write_text(
         '将 AltTab.app 拖入 Applications。首次使用需授予控制权限和屏幕录制权限。\n'
         f'这是基于 AltTab {VERSION} 的独立修改版，由 XI ZHANG 于 2026-10-29 制作，并非官方发行版。\n'
-        '修改说明见 README.md，GPL 许可证见 LICENSE.txt，完整对应源码包含在 Source.tar.gz 压缩包中。\n'
+        '修改说明见 README.md，GPL 许可证见 LICENSE.txt，完整对应源码在与 DMG 一起分发的 Source.tar.gz 压缩包中。\n'
         '本版本停用官方自动更新，后续更新需要重新编译分发。\n', encoding='utf-8')
     (STAGE / 'Applications').symlink_to('/Applications', target_is_directory=True)
     dmg = OUT / f'{NAME}-signed-unnotarized.dmg'

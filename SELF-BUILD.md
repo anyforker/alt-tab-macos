@@ -27,7 +27,7 @@ python3 scripts/package_self_build.py
 Without that signing certificate, build using your own identity or override with
 CODE_SIGN_IDENTITY=- 'OTHER_CODE_SIGN_FLAGS=--timestamp=none' for ad-hoc local use.
 The packager signs nested components and the DMG with Developer ID and secure timestamps.
-It embeds licenses, modification notices and the matching source archive in the DMG.
+It embeds licenses and modification notices in the DMG and creates the matching source archive beside it.
 Credentials and private keys are never included.
 
 To notarize and staple both the app and DMG using credentials already saved in Keychain:
@@ -48,6 +48,5 @@ build may require reauthorizing Accessibility and Screen Recording once. Prefere
 are retained; no license-key migration is performed. Automatic upstream updates are
 disabled. Future updates require rebuilding and distributing a new signed package.
 
-Keep this notice and the GPL license. The corresponding source archive accompanies
-the app inside the DMG. Recipients may use, modify and redistribute covered code under
+Keep this notice and the GPL license. Distribute the corresponding source archive alongside the DMG. Recipients may use, modify and redistribute covered code under
 GPL-3.0. This build comes without warranty. Do not present it as an official release.
