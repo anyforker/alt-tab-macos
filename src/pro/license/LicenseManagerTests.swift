@@ -57,6 +57,33 @@ final class LicenseManagerTests: XCTestCase {
 
     // MARK: - Launch / initialize
 
+    #if SELF_BUILD
+    func testSelfBuildKeepsFeaturesAvailableWithoutLicenseOrTrial() {
+        manager.initialize()
+        manager.onAppBecameUsable(accessibility: .granted, screenRecording: .granted)
+        clock.advance(days: 3650)
+        manager.refreshState()
+        XCTAssertEqual(manager.state, .pro)
+        XCTAssertTrue(manager.isProAvailable)
+        XCTAssertFalse(manager.isProLocked)
+        XCTAssertNil(manager.trialStartDate)
+        XCTAssertNil(keychain.value(account: LicenseManager.keychainKeyAccount))
+        XCTAssertTrue(api.validateCalls.isEmpty)
+    }
+
+    func testSelfBuildDoesNotValidateOrModifyExistingLicense() {
+        setupActivatedLicense(variantId: nil)
+        defaults.set(false, forKey: "lastValidationResult")
+        let originalKey = keychain.value(account: LicenseManager.keychainKeyAccount)
+        manager.initialize()
+        manager.refreshState()
+        XCTAssertEqual(manager.state, .pro)
+        XCTAssertEqual(keychain.value(account: LicenseManager.keychainKeyAccount), originalKey)
+        XCTAssertFalse(defaults.bool(forKey: "lastValidationResult"))
+        XCTAssertTrue(api.validateCalls.isEmpty)
+    }
+    #endif
+
     private func becomeUsable() {
         manager.onAppBecameUsable(accessibility: .granted, screenRecording: .granted)
     }

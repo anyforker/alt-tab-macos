@@ -145,24 +145,33 @@ class LicenseManager {
     }
 
     func initialize() {
+        #if SELF_BUILD
+        // Personal GPL build: enable local features without reading or validating a purchased key.
+        state = .pro
+        #else
         state = computeState()
         scheduleAsyncRevalidationIfNeeded()
+        #endif
     }
 
     /// Trial `daysRemaining` is baked into the `state` enum, so it stays frozen until something
     /// reassigns `state`. Call this from UI surfaces before they read `state` so the day count
     /// reflects the current clock. `didSet` only fires when the value actually changed.
     func refreshState() {
+        #if !SELF_BUILD
         let newState = computeState()
         if newState != state { state = newState }
+        #endif
     }
 
     /// Called after the switcher and input handlers exist, with the permission gate still satisfied.
     /// Reads and refreshes never start a trial; a saved start is immutable even after revocation or expiry.
     func onAppBecameUsable(accessibility: PermissionStatus, screenRecording: PermissionStatus) {
+        #if !SELF_BUILD
         guard PermissionFlow.isComplete(accessibility: accessibility, screenRecording: screenRecording) else { return }
         appIsUsable = true
         startTrialIfNeeded()
+        #endif
     }
 
     private func startTrialIfNeeded() {

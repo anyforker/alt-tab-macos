@@ -572,6 +572,8 @@ class App: AppCenterApplication {
         // Needs the AX runloop `BackgroundWork.start()` created, so it cannot go with the launch-time setup.
         AxObserverRegistry.shared.startRecoveryTicks()
         CliEvents.observe()
+        #if !SELF_BUILD
+        // Official binaries would replace the personal GPL build and its local configuration.
         App.sparkleDelegate = SparkleDelegate()
         App.updaterController = SPUStandardUpdaterController(
             startingUpdater: false,
@@ -583,6 +585,7 @@ class App: AppCenterApplication {
         }
         #else
         DispatchQueue.main.asyncAfter(deadline: .now() + 30) { App.updaterController?.startUpdater() }
+        #endif
         #endif
         PreferencesEvents.initialize()
         #if DEBUG

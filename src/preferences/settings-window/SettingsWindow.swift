@@ -166,6 +166,10 @@ final class UpgradeButton: ProGradientButton {
 
     func refreshTitle() {
         wrappedWidth = bounds.width
+        #if SELF_BUILD
+        toolTip = "Modified GPL build; all local features available."
+        applyTitle(secondary: nil, main: Self.attributed("Self Build", Self.mainFont), height: Self.oneLineHeight)
+        #else
         let state = LicenseManager.shared.state
         if state == .trialNotStarted {
             toolTip = ProFeatureCopy.trialSetup
@@ -186,6 +190,7 @@ final class UpgradeButton: ProGradientButton {
             return
         }
         setEmailTitle(title, email)
+        #endif
     }
 
     /// The email is often the customer's name, so it keeps the big font and grows the button over up
