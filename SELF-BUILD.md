@@ -1,6 +1,6 @@
-# AltTab Self Build 11.10.1
+# AltTab Self Build 11.10.2
 
-Modified by XI ZHANG on 2026-10-29, based on upstream tag v11.10.1 (c500294b):
+Modified by XI ZHANG on 2026-10-29, based on upstream tag v11.10.2 (2a9cbbb):
 https://github.com/lwouis/alt-tab-macos
 This is an independently modified GPL-3.0 build, not an official AltTab release.
 Upstream authors retain their copyrights. See LICENCE.md and distribution/third-party.
