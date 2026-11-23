@@ -9,7 +9,7 @@ Upstream authors retain their copyrights. See LICENCE.md and distribution/third-
 
 SELF_BUILD enables all local features without purchased license activation or remote
 validation. Permission setup does not start a Pro trial. Existing license data is
-preserved. Settings identifies this as Self Build rather than purchased Pro activation.
+preserved. Settings uses the upstream Pro activated label without asserting a purchased license.
 The official Sparkle updater is disabled to prevent replacement by official binaries.
 
 ## Building

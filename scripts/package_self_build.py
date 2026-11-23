@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = '11.10.2'
 IDENTITY = 'Developer ID Application: XI ZHANG (3L3BB9SDCS)'
 NAME = f'AltTab-{VERSION}-SelfBuild-universal'
-OUT = ROOT / 'build/distribution' / f'{VERSION}-selfbuild.1'
+OUT = ROOT / 'build/distribution' / f'{VERSION}-selfbuild.2'
 STAGE = OUT / 'stage'
 MACHO = {bytes.fromhex(x) for x in ('feedface', 'cefaedfe', 'feedfacf', 'cffaedfe', 'cafebabe', 'bebafeca', 'cafebabf', 'bfbafeca')}
 

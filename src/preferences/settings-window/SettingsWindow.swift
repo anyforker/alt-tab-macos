@@ -167,8 +167,8 @@ final class UpgradeButton: ProGradientButton {
     func refreshTitle() {
         wrappedWidth = bounds.width
         #if SELF_BUILD
-        toolTip = "Modified GPL build; all local features available."
-        applyTitle(secondary: nil, main: Self.attributed("Self Build", Self.mainFont), height: Self.oneLineHeight)
+        toolTip = nil
+        applyTitle(secondary: nil, main: Self.attributed(NSLocalizedString("Pro activated", comment: ""), Self.mainFont), height: Self.oneLineHeight)
         #else
         let state = LicenseManager.shared.state
         if state == .trialNotStarted {
