@@ -63,9 +63,10 @@ def sources(destination):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--notary-profile')
+    parser.add_argument('--app-path', type=Path)
     args = parser.parse_args()
     os.chdir(ROOT)
-    original = ROOT / 'DerivedData/Build/Products/Release/AltTab.app'
+    original = args.app_path or ROOT / 'DerivedData/Build/Products/Release/AltTab.app'
     info = plistlib.loads((original / 'Contents/Info.plist').read_bytes())
     if info['CFBundleShortVersionString'] != VERSION:
         raise SystemExit('Build the matching Release version first.')
